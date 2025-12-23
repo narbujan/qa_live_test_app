@@ -80,7 +80,7 @@ class UserControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(userJson))
                 .andExpect(status().isBadRequest())
-                .andExpect(status().reason("Person with person Id already registered"));
+                .andExpect(jsonPath("$.error").value("Person with person Id already registered"));
     }
 
     @Test
@@ -110,6 +110,6 @@ class UserControllerTest {
 
 		mockMvc.perform(get("/api/users/12345"))
 				.andExpect(status().isNotFound())
-				.andExpect(status().reason("Person with person Id not found"));
+				.andExpect(jsonPath("$.error").value("Person with person Id not found"));
 	}
 }
