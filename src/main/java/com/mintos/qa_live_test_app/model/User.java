@@ -2,7 +2,6 @@ package com.mintos.qa_live_test_app.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.antlr.v4.runtime.misc.NotNull;
 
 @Entity
 @Table(name = "users")
