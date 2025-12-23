@@ -1,0 +1,9 @@
+services:
+  db:
+    container_name: "qa_live_test_app_db"
+    image: "postgres:15.6-alpine"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "9999:5432"
