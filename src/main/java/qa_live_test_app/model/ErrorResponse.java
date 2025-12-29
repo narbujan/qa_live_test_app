@@ -1,4 +1,4 @@
-package com.mintos.qa_live_test_app.model;
+package qa_live_test_app.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

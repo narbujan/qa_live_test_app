@@ -1,19 +1,19 @@
-package com.mintos.qa_live_test_app.controller;
+package qa_live_test_app.controller;
 
-import com.mintos.qa_live_test_app.model.ErrorResponse;
-import com.mintos.qa_live_test_app.model.User;
-import com.mintos.qa_live_test_app.repository.UserRepository;
+import qa_live_test_app.model.ErrorResponse;
+import qa_live_test_app.model.User;
+import qa_live_test_app.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
 @AllArgsConstructor
+@CrossOrigin(origins = "*")
 public class UserController {
 
 	private final UserRepository userRepository;
