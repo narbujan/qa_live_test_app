@@ -1,4 +1,4 @@
-package com.mintos.qa_live_test_app;
+package qa_live_test_app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

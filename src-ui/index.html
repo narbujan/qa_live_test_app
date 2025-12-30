@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>User Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            max-width: 600px;
+        }
+        label {
+            display: block;
+            margin-top: 12px;
+        }
+        input, button {
+            padding: 8px;
+            width: 100%;
+            margin-top: 4px;
+        }
+        button {
+            margin-top: 16px;
+            cursor: pointer;
+        }
+        .error {
+            color: red;
+            margin-top: 12px;
+        }
+        .success {
+            color: green;
+            margin-top: 12px;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            margin-top: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>User Registration</h2>
+
+<form id="userForm">
+    <label>
+        Person ID
+        <input type="number" id="personId" required />
+    </label>
+
+    <label>
+        Name
+        <input type="text" id="name" required />
+    </label>
+
+    <label>
+        Surname
+        <input type="text" id="surname" required />
+    </label>
+
+    <label>
+        Email
+        <input type="email" id="email" required />
+    </label>
+
+    <label>
+        Mintos Employee
+        <input type="checkbox" id="mintosEmployee" />
+    </label>
+
+    <button type="submit">Save User</button>
+</form>
+
+<div id="message"></div>
+
+<hr />
+
+<h3>All Users</h3>
+<button onclick="loadUsers()">Load Users</button>
+<pre id="usersOutput"></pre>
+
+<script>
+    const API_BASE_URL = "http://app-backend:8080/users";
+
+    const form = document.getElementById("userForm");
+    const messageDiv = document.getElementById("message");
+    const usersOutput = document.getElementById("usersOutput");
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        messageDiv.innerHTML = "";
+
+        const user = {
+            personId: Number(document.getElementById("personId").value),
+            name: document.getElementById("name").value,
+            surname: document.getElementById("surname").value,
+            email: document.getElementById("email").value,
+            mintosEmployee: document.getElementById("mintosEmployee").checked
+        };
+
+        try {
+            const response = await fetch(API_BASE_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(user)
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                // Error handling (e.g. already registered)
+                messageDiv.innerHTML = `<div class="error">${data.message}</div>`;
+                return;
+            }
+
+            messageDiv.innerHTML = `<div class="success">User saved successfully</div>`;
+            form.reset();
+            loadUsers();
+
+        } catch (error) {
+            messageDiv.innerHTML = `<div class="error">Backend not reachable</div>`;
+        }
+    });
+
+    async function loadUsers() {
+        try {
+            const response = await fetch(API_BASE_URL);
+            const users = await response.json();
+            usersOutput.textContent = JSON.stringify(users, null, 2);
+        } catch (error) {
+            usersOutput.textContent = "Failed to load users";
+        }
+    }
+</script>
+
+</body>
+</html>

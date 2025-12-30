@@ -1,7 +1,7 @@
-package com.mintos.qa_live_test_app.controller;
+package qa_live_test_app.controller;
 
-import com.mintos.qa_live_test_app.model.User;
-import com.mintos.qa_live_test_app.repository.UserRepository;
+import qa_live_test_app.model.User;
+import qa_live_test_app.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
